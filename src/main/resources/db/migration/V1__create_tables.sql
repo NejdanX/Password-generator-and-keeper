@@ -21,7 +21,7 @@ CREATE TABLE Users
 CREATE TABLE Role
 (
     id bigserial not null,
-    role_name varchar(100) not null,
+    role_name varchar(100) not null unique,
     primary key (id)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE Reminder
     id bigserial not null,
     user_id     bigint not null references Users (id),
     resource_id bigint not null references Resource (id),
-    init_date   date not null,
+    init_date   date not null default current_date,
     remind_date date,
     primary key (id),
     unique (user_id, resource_id)
